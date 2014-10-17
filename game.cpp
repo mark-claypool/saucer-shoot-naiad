@@ -2,6 +2,8 @@
 // game.cpp
 // 
 
+#define VERSION 1.0
+
 // Engine includes.
 #include "GameManager.h"
 #include "LogManager.h"
@@ -24,6 +26,9 @@ int main(int argc, char *argv[]) {
     game_manager.shutDown();
     return 0;
   }
+
+  // Write game version information to logfile.
+  log_manager.writeLog("Saucer Shoot Naiad, version %0.1f", VERSION);
 
   // Set flush of logfile during development (when done, make false).
   log_manager.setFlush(true);

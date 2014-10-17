@@ -25,7 +25,7 @@ Star::Star() {
 
 void Star::draw() {
   GraphicsManager &graphics_manager = GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), STAR_CHAR); 
+  graphics_manager.drawCh(getPosition(), STAR_CHAR, COLOR_WHITE); 
 }
 
 // Handle event.

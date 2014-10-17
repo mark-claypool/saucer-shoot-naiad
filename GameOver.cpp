@@ -76,5 +76,6 @@ void GameOver::step() {
 
 void GameOver::draw() {
   GraphicsManager &graphics_manager = GraphicsManager::getInstance();
-  graphics_manager.drawString(getPosition(), "Game Over!", CENTER_JUSTIFIED);
+  graphics_manager.drawString(getPosition(), "Game Over!", 
+			      CENTER_JUSTIFIED, COLOR_WHITE);
 }
