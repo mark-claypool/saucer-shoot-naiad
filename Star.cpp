@@ -48,6 +48,4 @@ void Star::out() {
 	       random() % graphics_manager.getVertical());
   setPosition(pos);
   setXVelocity(-1.0 / (random()%10 + 1));
-  LogManager &log_manager = LogManager::getInstance();
-  log_manager.writeLog("Star!");
 }

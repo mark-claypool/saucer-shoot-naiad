@@ -19,6 +19,10 @@ Note, OBJECTS are all the .o files that make up your engine.
 2) Modify INCPATH and ENG in the enclosed Saucer Shoot Naiad Makefile
 to point to your engine.
 
+If using the full version of Dragonfly, uncomment the line:
+
+ CFLAGS= -DREGISTER
+
 3) Type "make".  This should build the game.
 
 4) Type "./game" (or "./game.exe" on Cygwin) to run.
