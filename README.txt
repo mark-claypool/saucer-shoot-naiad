@@ -1,13 +1,13 @@
 SAUCER SHOOT, Naiad Version
-v1.0
+v1.1
 
 This is a rendition of the Saucer Shoot tutorial for Dragonfly, but
 made to work with the Naiad version of Dragonfly.
 
 To compile:
 
-1) Create a library of your Dragonfly Naiad engine.  This can be most
-easily done by adding the following recipe to your Makefile:
+1) Create a library of your Dragonfly Naiad engine.  With a Makefile
+(Linux), this can be done by adding the following recipe:
 
 LIBRARY= libdragonfly.a
 
@@ -16,16 +16,18 @@ $(LIBRARY): $(OBJECTS) Makefile
 
 Note, OBJECTS are all the .o files that make up your engine.
 
-2) Modify INCPATH and ENG in the enclosed Saucer Shoot Naiad Makefile
-to point to your engine.
+2) Modify INCPATH and ENG in the enclosed Saucer Shoot Naiad Makefile (Linux)
+or adjust your project file accordingly (Windows or Mac) to point to your engine.
 
-If using the full version of Dragonfly, uncomment the line:
+If using the full version of Dragonfly (with event filtering),
+uncomment the line:
 
  CFLAGS= -DREGISTER
 
-3) Type "make".  This should build the game.
+3) Type "make" (Linux) or hit F7 (Windows).  This should build the game.
 
-4) Type "./game" (or "./game.exe" on Cygwin) to run.
+4) In terminal window (Linux or Mac), type "./game" to run or hit F5
+(Windows). This should run the game.
 
 5) Controls: Arrows move, Space fires, Enter nukes, 'q' quits       
 

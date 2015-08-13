@@ -17,10 +17,10 @@
 void populateWorld(void);
  
 int main(int argc, char *argv[]) {
-  LogManager &log_manager = LogManager::getInstance();
+  df::LogManager &log_manager = df::LogManager::getInstance();
 
   // Start up game manager.
-  GameManager &game_manager = GameManager::getInstance();
+  df::GameManager &game_manager = df::GameManager::getInstance();
   if (game_manager.startUp())  {
     log_manager.writeLog("Error starting game manager!");
     game_manager.shutDown();

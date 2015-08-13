@@ -7,15 +7,15 @@
  
 #define SAUCER_CHAR 'O'
 
-class Saucer : public Object {
+class Saucer : public df::Object {
  
  private:
   void moveToStart();
   void out();
-  void hit(EventCollision *p_c);
+  void hit(const df::EventCollision *p_c);
 
  public:
   Saucer();
-  int eventHandler(Event *p_e);
+  int eventHandler(const df::Event *p_e);
   void draw();
 };

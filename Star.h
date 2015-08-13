@@ -6,7 +6,7 @@
 
 #define STAR_CHAR '.'
 
-class Star : public Object {
+class Star : public df::Object {
 
  private:
   void out();
@@ -14,5 +14,5 @@ class Star : public Object {
  public:
   Star();
   void draw(void);
-  int eventHandler(Event *p_e);
+  int eventHandler(const df::Event *p_e);
 };

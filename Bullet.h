@@ -7,14 +7,14 @@
 
 #define BULLET_CHAR '-'
 
-class Bullet : public Object {
+class Bullet : public df::Object {
 
  private:
   void out();
-  void hit(EventCollision *p_c);
+  void hit(const df::EventCollision *p_c);
 
  public:
-  Bullet(Position hero_pos);
-  int eventHandler(Event *p_e);
+  Bullet(df::Position hero_pos);
+  int eventHandler(const df::Event *p_e);
   void draw();
 };

@@ -8,7 +8,7 @@
 
 #define NUKE_EVENT "nuke"
 
-class EventNuke : public Event {
+class EventNuke : public df::Event {
 
  public:
   EventNuke();

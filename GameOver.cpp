@@ -18,34 +18,34 @@ GameOver::GameOver() {
   setType("GameOver");
 
   // Put in center of screen.
-  GraphicsManager &graphics_manager = GraphicsManager::getInstance();
+  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
   int world_horiz = graphics_manager.getHorizontal();
   int world_vert = graphics_manager.getVertical();
-  Position p(world_horiz/2, world_vert/2);
+  df::Position p(world_horiz/2, world_vert/2);
   setPosition(p);
 
   // Exit after about 3 seconds.  
   time_to_live = 100;
 
   // Make like a View Object
-  setSolidness(SPECTRAL);
-  setAltitude(DF_MAX_ALTITUDE);
+  setSolidness(df::SPECTRAL);
+  setAltitude(df::MAX_ALTITUDE);
 
 #ifdef REGISTER
   // Register for step event.
-  registerInterest(DF_STEP_EVENT);
+  registerInterest(df::STEP_EVENT);
 #endif
 }
 
 // When done, game over.
 GameOver::~GameOver() {
-  WorldManager &world_manager = WorldManager::getInstance();
+  df::WorldManager &world_manager = df::WorldManager::getInstance();
 
   // Remove Saucers.
-  ObjectList object_list = world_manager.getAllObjects(true);
-  ObjectListIterator i(&object_list);
+  df::ObjectList object_list = world_manager.getAllObjects(true);
+  df::ObjectListIterator i(&object_list);
   for (i.first(); !i.isDone(); i.next()) {
-    Object *p_o = i.currentObject();
+    df::Object *p_o = i.currentObject();
     if (p_o -> getType() == "Saucer")
       world_manager.markForDelete(p_o);
   }
@@ -53,9 +53,9 @@ GameOver::~GameOver() {
 
 // Handle event.
 // Return 0 if ignored, else 1.
-int GameOver::eventHandler(Event *p_e) {
+int GameOver::eventHandler(const df::Event *p_e) {
 
-  if (p_e->getType() == DF_STEP_EVENT) {
+  if (p_e->getType() == df::STEP_EVENT) {
     step();
     return 1;
   }
@@ -68,14 +68,14 @@ int GameOver::eventHandler(Event *p_e) {
 void GameOver::step() {
   time_to_live--;
   if (time_to_live <= 0) { 
-    WorldManager &world_manager = WorldManager::getInstance();
+    df::WorldManager &world_manager = df::WorldManager::getInstance();
     world_manager.markForDelete(this);
-    GameManager::getInstance().setGameOver();
+    df::GameManager::getInstance().setGameOver();
   }
 }
 
 void GameOver::draw() {
-  GraphicsManager &graphics_manager = GraphicsManager::getInstance();
+  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
   graphics_manager.drawString(getPosition(), "Game Over!", 
-			      CENTER_JUSTIFIED, COLOR_WHITE);
+			      df::CENTER_JUSTIFIED, df::WHITE);
 }

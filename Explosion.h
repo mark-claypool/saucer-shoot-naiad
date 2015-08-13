@@ -4,7 +4,7 @@
 
 #include "Object.h"
 
-class Explosion : public Object {
+class Explosion : public df::Object {
 
  private:
   int time_to_live;
@@ -12,6 +12,6 @@ class Explosion : public Object {
 
  public:
   Explosion();
-  int eventHandler(Event *p_e);
+  int eventHandler(const df::Event *p_e);
   void draw();
 };

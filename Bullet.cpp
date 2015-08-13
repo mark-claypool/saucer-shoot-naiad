@@ -12,28 +12,28 @@
 #include "Bullet.h"
 #include "Saucer.h"
 
-Bullet::Bullet(Position hero_pos) {
+Bullet::Bullet(df::Position hero_pos) {
 
   // Set object properties.
   setType("Bullet");
   setXVelocity(1);		// move 1 space right every frame
 
   // Set starting location, based on hero's position passed in.
-  Position pos(hero_pos.getX()+3, hero_pos.getY());
+  df::Position pos(hero_pos.getX()+3, hero_pos.getY());
   setPosition(pos);
 }
 
 // Handle event.
 // Return 0 if ignored, else 1.
-int Bullet::eventHandler(Event *p_e) {
+int Bullet::eventHandler(const df::Event *p_e) {
 
-  if (p_e->getType() == DF_OUT_EVENT) {
+  if (p_e->getType() == df::OUT_EVENT) {
     out();
     return 1;
   }
 
-  if (p_e->getType() == DF_COLLISION_EVENT) {
-    EventCollision *p_collision_event = static_cast <EventCollision *> (p_e);
+  if (p_e->getType() == df::COLLISION_EVENT) {
+    const df::EventCollision *p_collision_event = static_cast <const df::EventCollision *> (p_e);
     hit(p_collision_event);
     return 1;
   }
@@ -44,18 +44,18 @@ int Bullet::eventHandler(Event *p_e) {
 
 // If bullet moves outside world, mark self for deletion.
 void Bullet::out() {
-  WorldManager &world_manager = WorldManager::getInstance();
+  df::WorldManager &world_manager = df::WorldManager::getInstance();
   world_manager.markForDelete(this);
 }
 
 // If bullet hits Saucer, mark Saucer and bullet for deletion.
-void Bullet::hit(EventCollision *p_c) {
-  WorldManager &world_manager = WorldManager::getInstance();
+void Bullet::hit(const df::EventCollision *p_c) {
+  df::WorldManager &world_manager = df::WorldManager::getInstance();
   world_manager.markForDelete(p_c->getObject1());
   world_manager.markForDelete(p_c->getObject2());
 }
 
 void Bullet::draw() {
-  GraphicsManager &graphics_manager = GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), BULLET_CHAR, COLOR_BLUE); 
+  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
+  graphics_manager.drawCh(getPosition(), BULLET_CHAR, df::BLUE); 
 }

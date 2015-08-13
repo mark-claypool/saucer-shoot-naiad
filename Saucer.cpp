@@ -17,7 +17,7 @@
 #include "Saucer.h"
 
 Saucer::Saucer() {
-  LogManager &log_manager = LogManager::getInstance();
+  df::LogManager &log_manager = df::LogManager::getInstance();
 
   // Set object type.
   setType("Saucer");
@@ -35,15 +35,15 @@ Saucer::Saucer() {
 
 // Handle event.
 // Return 0 if ignored, else 1.
-int Saucer::eventHandler(Event *p_e) {
+int Saucer::eventHandler(const df::Event *p_e) {
 
-  if (p_e->getType() == DF_OUT_EVENT) {
+  if (p_e->getType() == df::OUT_EVENT) {
     out();
     return 1;
   }
 
-  if (p_e->getType() == DF_COLLISION_EVENT) {
-    EventCollision *p_collision_event = static_cast <EventCollision *> (p_e);
+  if (p_e->getType() == df::COLLISION_EVENT) {
+    const df::EventCollision *p_collision_event = static_cast <const df::EventCollision *> (p_e);
     hit(p_collision_event);
     return 1;
   }
@@ -55,7 +55,7 @@ int Saucer::eventHandler(Event *p_e) {
     p_explosion -> setPosition(this -> getPosition());
  
     // Delete self.
-    WorldManager &world_manager = WorldManager::getInstance();
+    df::WorldManager &world_manager = df::WorldManager::getInstance();
     world_manager.markForDelete(this);
  
     // Saucers appear stay around perpetually
@@ -82,7 +82,7 @@ void Saucer::out() {
 }
 
 // If saucer and player collide, mark both for deletion.
-void Saucer::hit(EventCollision *p_c) {
+void Saucer::hit(const df::EventCollision *p_c) {
 
   // If Saucer on Saucer, ignore.
   if ((p_c -> getObject1() -> getType() == "Saucer") &&
@@ -104,7 +104,7 @@ void Saucer::hit(EventCollision *p_c) {
   // If Hero, mark both objects for destruction.
   if (((p_c -> getObject1() -> getType()) == "Hero") || 
       ((p_c -> getObject2() -> getType()) == "Hero")) {
-    WorldManager &world_manager = WorldManager::getInstance();
+    df::WorldManager &world_manager = df::WorldManager::getInstance();
     world_manager.markForDelete(p_c -> getObject1());
     world_manager.markForDelete(p_c -> getObject2());
   }
@@ -113,9 +113,9 @@ void Saucer::hit(EventCollision *p_c) {
 
 // Move saucer to starting location on right side of screen.
 void Saucer::moveToStart() {
-  GraphicsManager &graphics_manager = GraphicsManager::getInstance();
-  WorldManager &world_manager = WorldManager::getInstance();
-  Position temp_pos;
+  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
+  df::WorldManager &world_manager = df::WorldManager::getInstance();
+  df::Position temp_pos;
 
   // Get world boundaries.
   int world_horiz = graphics_manager.getHorizontal();
@@ -128,7 +128,7 @@ void Saucer::moveToStart() {
   temp_pos.setY(random()%(world_vert) + 0);
 
   // If collision, move right slightly until empty space.
-  ObjectList collision_list = world_manager.isCollision(this, temp_pos);
+  df::ObjectList collision_list = world_manager.isCollision(this, temp_pos);
   while (!collision_list.isEmpty()) {
     temp_pos.setX(temp_pos.getX()+1);
     collision_list = world_manager.isCollision(this, temp_pos);
@@ -138,6 +138,6 @@ void Saucer::moveToStart() {
 }
 
 void Saucer::draw() {
-  GraphicsManager &graphics_manager = GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), SAUCER_CHAR, COLOR_GREEN); 
+  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
+  graphics_manager.drawCh(getPosition(), SAUCER_CHAR, df::GREEN); 
 }
