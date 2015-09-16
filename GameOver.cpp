@@ -13,6 +13,9 @@
 #include "GameOver.h"
 #include "GraphicsManager.h"
 
+// Define registerInterest in case engine does not.
+static void registerInterest(std::string s) {};
+
 GameOver::GameOver() {
 
   setType("GameOver");
@@ -31,10 +34,8 @@ GameOver::GameOver() {
   setSolidness(df::SPECTRAL);
   setAltitude(df::MAX_ALTITUDE);
 
-#ifdef REGISTER
   // Register for step event.
   registerInterest(df::STEP_EVENT);
-#endif
 }
 
 // When done, game over.

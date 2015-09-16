@@ -16,18 +16,19 @@
 #include "GameOver.h"
 #include "Hero.h"
 
+// Define registerInterest in case engine does not.
+static void registerInterest(std::string s) {};
+
 Hero::Hero() {
 
   df::LogManager &log_manager = df::LogManager::getInstance();
 
-#ifdef REGISTER
   // Player controls hero, so register with keyboard and mouse.
   registerInterest(df::KEYBOARD_EVENT);
   registerInterest(df::MOUSE_EVENT);
 
   // Need to update fire rate control each step.
   registerInterest(df::STEP_EVENT);
-#endif
 
   // Set object type.
   setType("Hero");

@@ -16,6 +16,9 @@
 #include "Explosion.h"
 #include "Saucer.h"
 
+// Define registerInterest in case engine does not.
+static void registerInterest(std::string s) {};
+
 Saucer::Saucer() {
   df::LogManager &log_manager = df::LogManager::getInstance();
 
@@ -27,10 +30,8 @@ Saucer::Saucer() {
 
   moveToStart();
 
-#ifdef REGISTER
   // Register interest in "nuke" event.
   registerInterest(NUKE_EVENT);
-#endif 
 }
 
 // Handle event.

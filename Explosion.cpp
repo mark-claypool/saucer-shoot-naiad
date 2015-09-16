@@ -12,6 +12,9 @@
 // Game includes.
 #include "Explosion.h"
 
+// Define registerInterest in case engine does not.
+static void registerInterest(std::string s) {};
+
 Explosion::Explosion() {
   setType("Explosion");
 
@@ -21,11 +24,8 @@ Explosion::Explosion() {
   // Doesn't collide
   setSolidness(df::SPECTRAL);
 
-#ifdef REGISTER
   // Need step event to countdown.
   registerInterest(df::STEP_EVENT);
-#endif
-
 }
 
 // Handle event.
