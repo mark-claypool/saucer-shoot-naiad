@@ -2,7 +2,7 @@
 // Saucer.cpp
 //
  
-#include <stdlib.h>		// for random()
+#include <stdlib.h>		// for rand()
 
 // Engine includes.
 #include "EventCollision.h"
@@ -122,10 +122,10 @@ void Saucer::moveToStart() {
   int world_vert = graphics_manager.getVertical();
 
   // x is off right side of screen.
-  temp_pos.setX(world_horiz + random()%world_horiz + 3);
+  temp_pos.setX(world_horiz + rand()%world_horiz + 3);
 
   // y is in vertical range.
-  temp_pos.setY(random()%(world_vert) + 0);
+  temp_pos.setY(rand()%(world_vert) + 0);
 
   // If collision, move right slightly until empty space.
   df::ObjectList collision_list = world_manager.isCollision(this, temp_pos);
