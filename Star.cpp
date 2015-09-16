@@ -2,7 +2,7 @@
 // Star.cpp
 //
 
-#include <stdlib.h>		// for random
+#include <stdlib.h>		// for rand()
 
 // Engine includes.
 #include "EventOut.h"
@@ -15,11 +15,11 @@
 Star::Star() {
   setType("Star");
   setSolidness(df::SPECTRAL);
-  setXVelocity(-1.0 / (random()%10 + 1));
+  setXVelocity(-1.0 / (rand()%10 + 1));
   setAltitude(0);	// Make them in the background.
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Position pos(random()%graphics_manager.getHorizontal(),
-	       random()%graphics_manager.getVertical());
+  df::Position pos(rand()%graphics_manager.getHorizontal(),
+	       rand()%graphics_manager.getVertical());
   setPosition(pos);
 }
 
@@ -44,8 +44,8 @@ int Star::eventHandler(const df::Event *p_e) {
 // If Star moved off screen, move back to far right.
 void Star::out() {
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Position pos(graphics_manager.getHorizontal() + random()%20,
-	       random() % graphics_manager.getVertical());
+  df::Position pos(graphics_manager.getHorizontal() + rand()%20,
+	       rand() % graphics_manager.getVertical());
   setPosition(pos);
-  setXVelocity(-1.0 / (random()%10 + 1));
+  setXVelocity(-1.0 / (rand()%10 + 1));
 }
