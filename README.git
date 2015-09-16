@@ -1,6 +1,16 @@
 GIT README
 initial text from git "cheat sheets"
 see also: http://rogerdudler.github.io/git-guide/
+          http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf
+
+QUICK BASICS
+  git clone [url]
+  (do some work)
+  git add *
+  git commit -a
+  git commit -a -m "message"
+  git status
+  git push origin master
 
 SETUP & INIT
 Configuring user information, initializing and cloning repositories
@@ -11,6 +21,14 @@ initialize an existing directory as a Git repository
 retrieve an entire repository from a hosted location via UR
   git clone [url]
 
+quick set of commands to start a directory
+  cd myproject
+  git init
+  git add .
+  git commit -m 'initial commit'
+  git remote add origin FIX-URL-HERE
+  git push origin master
+
 
 STAGE & SNAPSHOT
 Working with snapshots and the Git staging area
@@ -20,6 +38,25 @@ add a file as it looks now to your next commit (stage)
 
 commit your staged content as a new commit snapshot
   git commit -m "[descriptive message]"
+
+Discard all local changes
+  git reset --hard HEAD
+
+Discard local changes to file
+  git checkout HEAD <file>
+
+
+REFACTOR FILENAMES
+Relocate and remove versioned files
+
+Deletes the file from the working directory and stages the deletion
+  git rm [file]
+
+Removes the file from version control but preserves the file locally
+  git rm --cached [file]
+
+Changes the file name and prepares it for commit
+  git mv [file-original] [file-renamed]
 
 
 BRANCH & MERGE
