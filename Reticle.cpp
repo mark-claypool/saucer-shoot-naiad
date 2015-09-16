@@ -10,6 +10,9 @@
 // Game includes.
 #include "Reticle.h"
 
+// Define registerInterest in case engine does not.
+static void registerInterest(std::string s) {};
+
 Reticle::Reticle() {
   setType("Reticle");
   setSolidness(df::SPECTRAL);
