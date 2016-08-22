@@ -13,8 +13,8 @@
 
 CC= g++ 
 LDFLAGS= -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lrt
-INCPATH= ../dragonfly	# path to engine includes
-ENG= ../dragonfly/libdragonfly.a	# dragonfly engine
+INCPATH= ../../dragonfly	# path to engine includes
+ENG= ../../dragonfly/libdragonfly.a	# dragonfly engine
 GAMESRC= Bullet.cpp \
          EventNuke.cpp \
          Explosion.cpp \

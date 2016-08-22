@@ -25,8 +25,8 @@ Saucer::Saucer() {
   // Set object type.
   setType("Saucer");
 
-  // Set speed in vertical direction.
-  setXVelocity(-0.25);		// 1 space every 4 frames
+  // Set speed in horizontal direction.
+  setVelocity(df::Vector(-0.25,0)); // 1 space left every 4 frames
 
   moveToStart();
 
@@ -116,14 +116,14 @@ void Saucer::hit(const df::EventCollision *p_c) {
 void Saucer::moveToStart() {
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
   df::WorldManager &world_manager = df::WorldManager::getInstance();
-  df::Position temp_pos;
+  df::Vector temp_pos;
 
   // Get world boundaries.
-  int world_horiz = graphics_manager.getHorizontal();
-  int world_vert = graphics_manager.getVertical();
+  int world_horiz = (int) graphics_manager.getHorizontal();
+  int world_vert = (int) graphics_manager.getVertical();
 
   // x is off right side of screen.
-  temp_pos.setX(world_horiz + rand()%world_horiz + 3);
+  temp_pos.setX(world_horiz + rand()%world_horiz + 3.0f);
 
   // y is in vertical range.
   temp_pos.setY(rand()%(world_vert) + 0);
@@ -131,7 +131,7 @@ void Saucer::moveToStart() {
   // If collision, move right slightly until empty space.
   df::ObjectList collision_list = world_manager.isCollision(this, temp_pos);
   while (!collision_list.isEmpty()) {
-    temp_pos.setX(temp_pos.getX()+1);
+    temp_pos.setX(temp_pos.getX()+1.0f);
     collision_list = world_manager.isCollision(this, temp_pos);
   }
 

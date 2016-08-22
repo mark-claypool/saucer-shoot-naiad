@@ -55,10 +55,10 @@ void Explosion::draw() {
   graphics_manager.drawCh(getPosition(), '*', df::RED); 
 
   if (time_to_live < 4) {
-    df::Position p1(getPosition().getX()-1, getPosition().getY()-1);
-    df::Position p2(getPosition().getX()+1, getPosition().getY()-1);
-    df::Position p3(getPosition().getX()-1, getPosition().getY()+1);
-    df::Position p4(getPosition().getX()+1, getPosition().getY()+1);
+    df::Vector p1(getPosition().getX()-1, getPosition().getY()-1);
+    df::Vector p2(getPosition().getX()+1, getPosition().getY()-1);
+    df::Vector p3(getPosition().getX()-1, getPosition().getY()+1);
+    df::Vector p4(getPosition().getX()+1, getPosition().getY()+1);
     graphics_manager.drawCh(p1, '\\', df::RED); 
     graphics_manager.drawCh(p2, '/', df::RED); 
     graphics_manager.drawCh(p3, '/', df::RED); 

@@ -15,12 +15,12 @@
 Star::Star() {
   setType("Star");
   setSolidness(df::SPECTRAL);
-  setXVelocity((float) (-1.0 / (rand()%10 + 1)));
+  setVelocity(df::Vector((float) -1.0 /(rand()%9 + 2), 0));
   setAltitude(0);	// Make them in the background.
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Position pos(rand()%graphics_manager.getHorizontal(),
-	       rand()%graphics_manager.getVertical());
-  setPosition(pos);
+  df::Vector p(rand()%(int)graphics_manager.getHorizontal(),
+	       rand()%(int)graphics_manager.getVertical());
+  setPosition(p);
 }
 
 void Star::draw() {
@@ -44,8 +44,8 @@ int Star::eventHandler(const df::Event *p_e) {
 // If Star moved off screen, move back to far right.
 void Star::out() {
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Position pos(graphics_manager.getHorizontal() + rand()%20,
-	       rand() % graphics_manager.getVertical());
+  df::Vector pos((float) (graphics_manager.getHorizontal() + rand()%20),
+		 (float) (rand() % graphics_manager.getVertical()));
   setPosition(pos);
-  setXVelocity((float)(-1.0 / (rand() % 10 + 1)));
+  setVelocity(df::Vector((float) -1.0 /(rand()%9 + 2), 0));
 }

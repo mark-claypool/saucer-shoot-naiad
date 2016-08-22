@@ -35,7 +35,7 @@ Hero::Hero() {
 
   // Set starting location.
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Position pos(7, graphics_manager.getVertical()/2);
+  df::Vector pos(7.0f, graphics_manager.getVertical()/2.0f);
   setPosition(pos);
 
   // Create reticle for firing bullets.
@@ -57,7 +57,7 @@ Hero::~Hero() {
   // Make big explosion.
   for (int i=-8; i<=8; i+=5) {
     for (int j=-5; j<=5; j+=3) {
-      df::Position temp_pos = this->getPosition();
+      df::Vector temp_pos = this->getPosition();
       temp_pos.setX(this->getPosition().getX() + i);
       temp_pos.setY(this->getPosition().getY() + j);
       Explosion *p_explosion = new Explosion;
@@ -132,7 +132,7 @@ void Hero::kbd(const df::EventKeyboard *p_keyboard_event) {
 void Hero::move(int dy) {
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
   df::WorldManager &world_manager = df::WorldManager::getInstance();
-  df::Position new_pos(getPosition().getX(), getPosition().getY() + dy);
+  df::Vector new_pos(getPosition().getX(), getPosition().getY() + dy);
 
   // If stays on screen, allow move.
   if ((new_pos.getY() >= 0) && 
@@ -141,7 +141,7 @@ void Hero::move(int dy) {
 }
 
 // Fire bullet towards target.
-void Hero::fire(df::Position target) {
+void Hero::fire(df::Vector target) {
 
   // See if time to fire.
   if (fire_countdown > 0)
@@ -150,8 +150,9 @@ void Hero::fire(df::Position target) {
 
   // Fire Bullet towards target.
   Bullet *p = new Bullet(getPosition());
-  p->setYVelocity((float) (target.getY() - getPosition().getY()) /
-		  (float) (target.getX() - getPosition().getX()));
+  p->setVelocity(df::Vector(p->getVelocity().getX(),
+			    (target.getY() - getPosition().getY()) /
+			    (target.getX() - getPosition().getX())));
 }
 
 // Decrease fire restriction.

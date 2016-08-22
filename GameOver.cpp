@@ -22,9 +22,9 @@ GameOver::GameOver() {
 
   // Put in center of screen.
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  int world_horiz = graphics_manager.getHorizontal();
-  int world_vert = graphics_manager.getVertical();
-  df::Position p(world_horiz/2, world_vert/2);
+  int world_horiz = (int) graphics_manager.getHorizontal();
+  int world_vert = (int) graphics_manager.getVertical();
+  df::Vector p((float)(world_horiz/2.0f), (float) (world_vert/2.0f));
   setPosition(p);
 
   // Exit after about 3 seconds.  

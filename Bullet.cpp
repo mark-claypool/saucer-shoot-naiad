@@ -12,15 +12,15 @@
 #include "Bullet.h"
 #include "Saucer.h"
 
-Bullet::Bullet(df::Position hero_pos) {
+Bullet::Bullet(df::Vector hero_pos) {
 
   // Set object properties.
   setType("Bullet");
-  setXVelocity(1);		// move 1 space right every frame
+  setVelocity(df::Vector(1,0)); // Move 1 space right every game loop.
 
   // Set starting location, based on hero's position passed in.
-  df::Position pos(hero_pos.getX()+3, hero_pos.getY());
-  setPosition(pos);
+  df::Vector p(hero_pos.getX()+3, hero_pos.getY());
+  setPosition(p);
 }
 
 // Handle event.
