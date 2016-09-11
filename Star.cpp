@@ -18,8 +18,8 @@ Star::Star() {
   setVelocity(df::Vector((float) -1.0 /(rand()%9 + 2), 0));
   setAltitude(0);	// Make them in the background.
   df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Vector p(rand()%(int)graphics_manager.getHorizontal(),
-	       rand()%(int)graphics_manager.getVertical());
+  df::Vector p((float) (rand()%(int)graphics_manager.getHorizontal()),
+	       (float) (rand()%(int)graphics_manager.getVertical()));
   setPosition(p);
 }
 

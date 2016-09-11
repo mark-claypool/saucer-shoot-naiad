@@ -126,7 +126,7 @@ void Saucer::moveToStart() {
   temp_pos.setX(world_horiz + rand()%world_horiz + 3.0f);
 
   // y is in vertical range.
-  temp_pos.setY(rand()%(world_vert) + 0);
+  temp_pos.setY(rand()%(world_vert) + 0.0f);
 
   // If collision, move right slightly until empty space.
   df::ObjectList collision_list = world_manager.isCollision(this, temp_pos);

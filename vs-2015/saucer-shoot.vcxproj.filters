@@ -27,7 +27,13 @@
     <ClInclude Include="..\GameOver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameStart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\Hero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Points.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Reticle.h">
@@ -56,7 +62,13 @@
     <ClCompile Include="..\GameOver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameStart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\Hero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Points.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Reticle.cpp">
