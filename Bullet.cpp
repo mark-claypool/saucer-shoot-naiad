@@ -3,10 +3,10 @@
 //
 
 // Engine includes.
-#include "GraphicsManager.h"
+#include "DisplayManager.h"
+#include "EventOut.h"
 #include "LogManager.h"
 #include "WorldManager.h"
-#include "EventOut.h"
 
 // Game includes.
 #include "Bullet.h"
@@ -44,18 +44,15 @@ int Bullet::eventHandler(const df::Event *p_e) {
 
 // If bullet moves outside world, mark self for deletion.
 void Bullet::out() {
-  df::WorldManager &world_manager = df::WorldManager::getInstance();
-  world_manager.markForDelete(this);
+  WM.markForDelete(this);
 }
 
 // If bullet hits Saucer, mark Saucer and bullet for deletion.
 void Bullet::hit(const df::EventCollision *p_c) {
-  df::WorldManager &world_manager = df::WorldManager::getInstance();
-  world_manager.markForDelete(p_c->getObject1());
-  world_manager.markForDelete(p_c->getObject2());
+  WM.markForDelete(p_c->getObject1());
+  WM.markForDelete(p_c->getObject2());
 }
 
 void Bullet::draw() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), BULLET_CHAR, df::BLUE); 
+  DM.drawCh(getPosition(), BULLET_CHAR, df::BLUE); 
 }

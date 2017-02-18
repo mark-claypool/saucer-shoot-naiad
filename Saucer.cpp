@@ -5,10 +5,10 @@
 #include <stdlib.h>		// for rand()
 
 // Engine includes.
+#include "DisplayManager.h"
 #include "EventCollision.h"
 #include "EventNuke.h"
 #include "EventOut.h"
-#include "GraphicsManager.h"
 #include "LogManager.h"
 #include "WorldManager.h"
  
@@ -20,7 +20,6 @@
 static void registerInterest(std::string s) {};
 
 Saucer::Saucer() {
-  df::LogManager &log_manager = df::LogManager::getInstance();
 
   // Set object type.
   setType("Saucer");
@@ -56,8 +55,7 @@ int Saucer::eventHandler(const df::Event *p_e) {
     p_explosion -> setPosition(this -> getPosition());
  
     // Delete self.
-    df::WorldManager &world_manager = df::WorldManager::getInstance();
-    world_manager.markForDelete(this);
+    WM.markForDelete(this);
  
     // Saucers appear stay around perpetually
     new Saucer;
@@ -105,22 +103,19 @@ void Saucer::hit(const df::EventCollision *p_c) {
   // If Hero, mark both objects for destruction.
   if (((p_c -> getObject1() -> getType()) == "Hero") || 
       ((p_c -> getObject2() -> getType()) == "Hero")) {
-    df::WorldManager &world_manager = df::WorldManager::getInstance();
-    world_manager.markForDelete(p_c -> getObject1());
-    world_manager.markForDelete(p_c -> getObject2());
+    WM.markForDelete(p_c -> getObject1());
+    WM.markForDelete(p_c -> getObject2());
   }
 
 }
 
 // Move saucer to starting location on right side of screen.
 void Saucer::moveToStart() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::WorldManager &world_manager = df::WorldManager::getInstance();
   df::Vector temp_pos;
 
   // Get world boundaries.
-  int world_horiz = (int) graphics_manager.getHorizontal();
-  int world_vert = (int) graphics_manager.getVertical();
+  int world_horiz = (int) DM.getHorizontal();
+  int world_vert = (int) DM.getVertical();
 
   // x is off right side of screen.
   temp_pos.setX(world_horiz + rand()%world_horiz + 3.0f);
@@ -129,16 +124,15 @@ void Saucer::moveToStart() {
   temp_pos.setY(rand()%(world_vert) + 0.0f);
 
   // If collision, move right slightly until empty space.
-  df::ObjectList collision_list = world_manager.isCollision(this, temp_pos);
+  df::ObjectList collision_list = WM.isCollision(this, temp_pos);
   while (!collision_list.isEmpty()) {
     temp_pos.setX(temp_pos.getX()+1.0f);
-    collision_list = world_manager.isCollision(this, temp_pos);
+    collision_list = WM.isCollision(this, temp_pos);
   }
 
-  world_manager.moveObject(this, temp_pos);
+  WM.moveObject(this, temp_pos);
 }
 
 void Saucer::draw() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), SAUCER_CHAR, df::GREEN); 
+  DM.drawCh(getPosition(), SAUCER_CHAR, df::GREEN); 
 }

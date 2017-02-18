@@ -5,8 +5,8 @@
 #include <stdlib.h>		// for rand()
 
 // Engine includes.
+#include "DisplayManager.h"
 #include "EventOut.h"
-#include "GraphicsManager.h"
 #include "LogManager.h"
 
 // Game includes.
@@ -17,15 +17,13 @@ Star::Star() {
   setSolidness(df::SPECTRAL);
   setVelocity(df::Vector((float) -1.0 /(rand()%9 + 2), 0));
   setAltitude(0);	// Make them in the background.
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Vector p((float) (rand()%(int)graphics_manager.getHorizontal()),
-	       (float) (rand()%(int)graphics_manager.getVertical()));
+  df::Vector p((float) (rand()%(int)DM.getHorizontal()),
+	       (float) (rand()%(int)DM.getVertical()));
   setPosition(p);
 }
 
 void Star::draw() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), STAR_CHAR, df::WHITE); 
+  DM.drawCh(getPosition(), STAR_CHAR, df::WHITE); 
 }
 
 // Handle event.
@@ -43,9 +41,8 @@ int Star::eventHandler(const df::Event *p_e) {
 
 // If Star moved off screen, move back to far right.
 void Star::out() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Vector pos((float) (graphics_manager.getHorizontal() + rand()%20),
-		 (float) (rand() % graphics_manager.getVertical()));
+  df::Vector pos((float) (DM.getHorizontal() + rand()%20),
+		 (float) (rand() % DM.getVertical()));
   setPosition(pos);
   setVelocity(df::Vector((float) -1.0 /(rand()%9 + 2), 0));
 }

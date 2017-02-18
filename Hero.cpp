@@ -3,9 +3,9 @@
 //
 
 // Engine includes.
+#include "DisplayManager.h"
 #include "EventMouse.h"
 #include "EventStep.h"
-#include "GraphicsManager.h"
 #include "LogManager.h"
 #include "WorldManager.h"
 
@@ -21,8 +21,6 @@ static void registerInterest(std::string s) {};
 
 Hero::Hero() {
 
-  df::LogManager &log_manager = df::LogManager::getInstance();
-
   // Player controls hero, so register with keyboard and mouse.
   registerInterest(df::KEYBOARD_EVENT);
   registerInterest(df::MOUSE_EVENT);
@@ -34,8 +32,7 @@ Hero::Hero() {
   setType("Hero");
 
   // Set starting location.
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::Vector pos(7.0f, graphics_manager.getVertical()/2.0f);
+  df::Vector pos(7.0f, DM.getVertical()/2.0f);
   setPosition(pos);
 
   // Create reticle for firing bullets.
@@ -102,7 +99,6 @@ void Hero::mouse(const df::EventMouse *p_mouse_event) {
 
 // Take appropriate action according to key pressed.
 void Hero::kbd(const df::EventKeyboard *p_keyboard_event) {
-  df::WorldManager &world_manager = df::WorldManager::getInstance();
 
   switch(p_keyboard_event->getKey()) {
   case df::Keyboard::W:			// up
@@ -118,10 +114,8 @@ void Hero::kbd(const df::EventKeyboard *p_keyboard_event) {
       nuke();
     break;
   case df::Keyboard::Q:			// quit
-    if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED) {
-      df::WorldManager &world_manager = df::WorldManager::getInstance();
-      world_manager.markForDelete(this);
-    }
+    if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED)
+      WM.markForDelete(this);
     break;
   };
 
@@ -130,14 +124,12 @@ void Hero::kbd(const df::EventKeyboard *p_keyboard_event) {
 
 // Move up or down.
 void Hero::move(int dy) {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  df::WorldManager &world_manager = df::WorldManager::getInstance();
   df::Vector new_pos(getPosition().getX(), getPosition().getY() + dy);
 
   // If stays on screen, allow move.
   if ((new_pos.getY() >= 0) && 
-        (new_pos.getY() < graphics_manager.getVertical()))
-      world_manager.moveObject(this, new_pos);
+        (new_pos.getY() < DM.getVertical()))
+      WM.moveObject(this, new_pos);
 }
 
 // Fire bullet towards target.
@@ -171,13 +163,11 @@ void Hero::nuke() {
   nuke_count--;
 
   // Create "nuke" event and send to interested.
-  df::WorldManager &world_manager = df::WorldManager::getInstance();
   EventNuke nuke;
-  world_manager.onEvent(&nuke);
+  WM.onEvent(&nuke);
 }
 
-// 
+//  Custom draw.
 void Hero::draw() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), HERO_CHAR, df::BLUE); 
+  DM.drawCh(getPosition(), HERO_CHAR, df::BLUE); 
 }

@@ -3,9 +3,9 @@
 //
 
 // Engine includes.
+#include "DisplayManager.h"
 #include "EventStep.h"
 #include "GameManager.h"
-#include "GraphicsManager.h"
 #include "LogManager.h"
 #include "WorldManager.h"
 
@@ -44,24 +44,21 @@ int Explosion::eventHandler(const df::Event *p_e) {
 // Count down until explosion finished.
 void Explosion::step() {
   time_to_live--;
-  if (time_to_live <= 0){
-    df::WorldManager &world_manager = df::WorldManager::getInstance();
-    world_manager.markForDelete(this);
-  }
+  if (time_to_live <= 0)
+    WM.markForDelete(this);
 }
 
 void Explosion::draw() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  graphics_manager.drawCh(getPosition(), '*', df::RED); 
+  DM.drawCh(getPosition(), '*', df::RED); 
 
   if (time_to_live < 4) {
     df::Vector p1(getPosition().getX()-1, getPosition().getY()-1);
     df::Vector p2(getPosition().getX()+1, getPosition().getY()-1);
     df::Vector p3(getPosition().getX()-1, getPosition().getY()+1);
     df::Vector p4(getPosition().getX()+1, getPosition().getY()+1);
-    graphics_manager.drawCh(p1, '\\', df::RED); 
-    graphics_manager.drawCh(p2, '/', df::RED); 
-    graphics_manager.drawCh(p3, '/', df::RED); 
-    graphics_manager.drawCh(p4, '\\', df::RED); 
+    DM.drawCh(p1, '\\', df::RED); 
+    DM.drawCh(p2, '/', df::RED); 
+    DM.drawCh(p3, '/', df::RED); 
+    DM.drawCh(p4, '\\', df::RED); 
   }
 }

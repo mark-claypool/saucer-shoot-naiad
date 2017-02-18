@@ -3,15 +3,15 @@
 //
 
 // Engine includes.
+#include "DisplayManager.h"
 #include "EventStep.h"
 #include "GameManager.h"
-#include "GraphicsManager.h"
 #include "LogManager.h"
 #include "WorldManager.h"
 
 // Game includes.
+#include "DisplayManager.h"
 #include "GameOver.h"
-#include "GraphicsManager.h"
 
 // Define registerInterest in case engine does not.
 static void registerInterest(std::string s) {};
@@ -21,9 +21,8 @@ GameOver::GameOver() {
   setType("GameOver");
 
   // Put in center of screen.
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  int world_horiz = (int) graphics_manager.getHorizontal();
-  int world_vert = (int) graphics_manager.getVertical();
+  int world_horiz = (int) DM.getHorizontal();
+  int world_vert = (int) DM.getVertical();
   df::Vector p((float)(world_horiz/2.0f), (float) (world_vert/2.0f));
   setPosition(p);
 
@@ -40,15 +39,14 @@ GameOver::GameOver() {
 
 // When done, game over.
 GameOver::~GameOver() {
-  df::WorldManager &world_manager = df::WorldManager::getInstance();
 
   // Remove Saucers.
-  df::ObjectList object_list = world_manager.getAllObjects(true);
+  df::ObjectList object_list = WM.getAllObjects(true);
   df::ObjectListIterator i(&object_list);
   for (i.first(); !i.isDone(); i.next()) {
     df::Object *p_o = i.currentObject();
     if (p_o -> getType() == "Saucer")
-      world_manager.markForDelete(p_o);
+      WM.markForDelete(p_o);
   }
 }
 
@@ -69,14 +67,11 @@ int GameOver::eventHandler(const df::Event *p_e) {
 void GameOver::step() {
   time_to_live--;
   if (time_to_live <= 0) { 
-    df::WorldManager &world_manager = df::WorldManager::getInstance();
-    world_manager.markForDelete(this);
-    df::GameManager::getInstance().setGameOver();
+    WM.markForDelete(this);
+    GM.setGameOver();
   }
 }
 
 void GameOver::draw() {
-  df::GraphicsManager &graphics_manager = df::GraphicsManager::getInstance();
-  graphics_manager.drawString(getPosition(), "Game Over!", 
-			      df::CENTER_JUSTIFIED, df::WHITE);
+  DM.drawString(getPosition(), "Game Over!", df::CENTER_JUSTIFIED, df::WHITE);
 }

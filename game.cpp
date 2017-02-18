@@ -2,7 +2,7 @@
 // game.cpp
 // 
 
-#define VERSION 1.0
+#define VERSION 1.1
 
 // Engine includes.
 #include "GameManager.h"
@@ -17,30 +17,28 @@
 void populateWorld(void);
  
 int main(int argc, char *argv[]) {
-  df::LogManager &log_manager = df::LogManager::getInstance();
 
   // Start up game manager.
-  df::GameManager &game_manager = df::GameManager::getInstance();
-  if (game_manager.startUp())  {
-    log_manager.writeLog("Error starting game manager!");
-    game_manager.shutDown();
+  if (GM.startUp())  {
+    LM.writeLog("Error starting game manager!");
+    GM.shutDown();
     return 0;
   }
 
   // Write game version information to logfile.
-  log_manager.writeLog("Saucer Shoot Naiad, version %0.1f", VERSION);
+  LM.writeLog("Saucer Shoot Naiad, version %0.1f", VERSION);
 
   // Set flush of logfile during development (when done, make false).
-  log_manager.setFlush(true);
+  LM.setFlush(true);
 
   // Setup some objects.
   populateWorld();
  
   // Run game (this blocks until game loop is over).
-  game_manager.run();
+  GM.run();
  
   // Shut everything down.
-  game_manager.shutDown();
+  GM.shutDown();
 }
  
 // Populate world with some objects.
