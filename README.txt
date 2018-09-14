@@ -20,11 +20,6 @@ Note, OBJECTS are all the .o files that make up your engine.
 (Linux or Mac) or adjust your project file accordingly (Windows) to
 point to your engine.
 
-If using the full version of Dragonfly (with event filtering),
-uncomment the line:
-
- CFLAGS= -DREGISTER
-
 3) Type "make" (Linux or Mac) or hit F7 (Windows).  This should build
 the game.
 
