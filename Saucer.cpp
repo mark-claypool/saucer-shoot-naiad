@@ -133,6 +133,6 @@ void Saucer::moveToStart() {
   WM.moveObject(this, temp_pos);
 }
 
-void Saucer::draw() {
+int Saucer::draw() {
   DM.drawCh(getPosition(), SAUCER_CHAR, df::GREEN); 
 }

@@ -72,6 +72,6 @@ void GameOver::step() {
   }
 }
 
-void GameOver::draw() {
+int GameOver::draw() {
   DM.drawString(getPosition(), "Game Over!", df::CENTER_JUSTIFIED, df::WHITE);
 }

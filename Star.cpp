@@ -22,7 +22,7 @@ Star::Star() {
   setPosition(p);
 }
 
-void Star::draw() {
+int Star::draw() {
   DM.drawCh(getPosition(), STAR_CHAR, df::WHITE); 
 }
 

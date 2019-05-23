@@ -48,7 +48,7 @@ void Explosion::step() {
     WM.markForDelete(this);
 }
 
-void Explosion::draw() {
+int Explosion::draw() {
   DM.drawCh(getPosition(), '*', df::RED); 
 
   if (time_to_live < 4) {

@@ -16,5 +16,5 @@ class Bullet : public df::Object {
  public:
   Bullet(df::Vector hero_pos);
   int eventHandler(const df::Event *p_e);
-  void draw();
+  int draw();
 };

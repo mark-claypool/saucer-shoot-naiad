@@ -23,7 +23,7 @@ Hero::Hero() {
 
   // Player controls hero, so register with keyboard and mouse.
   registerInterest(df::KEYBOARD_EVENT);
-  registerInterest(df::MOUSE_EVENT);
+  registerInterest(df::MSE_EVENT);
 
   // Need to update fire rate control each step.
   registerInterest(df::STEP_EVENT);
@@ -73,7 +73,7 @@ int Hero::eventHandler(const df::Event *p_e) {
     return 1;
   }
 
-  if (p_e->getType() == df::MOUSE_EVENT) {
+  if (p_e->getType() == df::MSE_EVENT) {
     const df::EventMouse *p_mouse_event = dynamic_cast <const df::EventMouse *> (p_e);
     mouse(p_mouse_event);
     return 1;
@@ -168,6 +168,6 @@ void Hero::nuke() {
 }
 
 //  Custom draw.
-void Hero::draw() {
+int Hero::draw() {
   DM.drawCh(getPosition(), HERO_CHAR, df::BLUE); 
 }

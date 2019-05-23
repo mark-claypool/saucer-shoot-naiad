@@ -4,6 +4,16 @@ v1.2
 This is a rendition of the Saucer Shoot tutorial for Dragonfly, but
 made to work with the Naiad version of Dragonfly.
 
+Tutorial for full version of game available online:
+
+ http://dragonfly.wpi.edu/tutorial/index.html
+
+And in book:
+
+ Mark Claypool. Dragonfly - Program a Game Engine from Scratch,
+ Interactive Media and Game Development, Worcester Polytechnic
+ Institute, 2014. Online at: http://dragonfly.wpi.edu/book/
+
 To compile:
 
 1) Create a library of your Dragonfly Naiad engine.  With a Makefile

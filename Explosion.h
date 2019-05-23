@@ -13,5 +13,5 @@ class Explosion : public df::Object {
  public:
   Explosion();
   int eventHandler(const df::Event *p_e);
-  void draw();
+  int draw();
 };

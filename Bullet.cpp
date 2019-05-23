@@ -53,6 +53,6 @@ void Bullet::hit(const df::EventCollision *p_c) {
   WM.markForDelete(p_c->getObject2());
 }
 
-void Bullet::draw() {
+int Bullet::draw() {
   DM.drawCh(getPosition(), BULLET_CHAR, df::BLUE); 
 }

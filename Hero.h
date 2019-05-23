@@ -26,5 +26,5 @@ class Hero : public df::Object {
   Hero();
   ~Hero();
   int eventHandler(const df::Event *p_e);
-  void draw();
+  int draw();
 };
