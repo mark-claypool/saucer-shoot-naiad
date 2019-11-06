@@ -1,8 +1,14 @@
 //
 // Saucer.cpp
 //
- 
+
+// Uncomment if Dragonfly uses STL instead of ObjectList.
+#define USE_STL
+
 #include <stdlib.h>		// for rand()
+#ifdef USE_STL
+#include <vector>
+#endif
 
 // Engine includes.
 #include "DisplayManager.h"
@@ -124,11 +130,19 @@ void Saucer::moveToStart() {
   temp_pos.setY(rand()%(world_vert) + 0.0f);
 
   // If collision, move right slightly until empty space.
+#ifdef USE_STL
+  std::vector<Object *> collision_list = WM.isCollision(this, temp_pos);
+  while (!collision_list.empty()) {
+    temp_pos.setX(temp_pos.getX()+1.0f);
+    collision_list = WM.isCollision(this, temp_pos);
+  }
+#else
   df::ObjectList collision_list = WM.isCollision(this, temp_pos);
   while (!collision_list.isEmpty()) {
     temp_pos.setX(temp_pos.getX()+1.0f);
     collision_list = WM.isCollision(this, temp_pos);
   }
+#endif  
 
   WM.moveObject(this, temp_pos);
 }

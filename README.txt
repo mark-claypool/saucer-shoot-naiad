@@ -1,5 +1,5 @@
 SAUCER SHOOT, Naiad Version
-v1.2
+v1.3
 
 This is a rendition of the Saucer Shoot tutorial for Dragonfly, but
 made to work with the Naiad version of Dragonfly.
@@ -13,6 +13,10 @@ And in book:
  Mark Claypool. Dragonfly - Program a Game Engine from Scratch,
  Interactive Media and Game Development, Worcester Polytechnic
  Institute, 2014. Online at: http://dragonfly.wpi.edu/book/
+
+IMPORTANT! The code can be configured to use an C++ STL version of the
+Dragonfly engine.  To do so, open Saucer.cpp and uncomment the
+"USE_STL line at the top.
 
 To compile:
 
@@ -36,7 +40,7 @@ the game.
 4) In terminal window (Linux or Mac), type "./game" to run or hit F5
 (Windows). This should run the game.
 
-5) Controls: Arrows move, Space fires, Enter nukes, 'q' quits       
+5) Controls: Arrows move, Mouse moves reticle, Click fires, Space nukes, 'q' quits       
 
 For a description of the capabilities of this engine, see:
 

@@ -2,7 +2,7 @@
 // game.cpp
 // 
 
-#define VERSION 1.1
+#define VERSION 1.3
 
 // Engine includes.
 #include "GameManager.h"

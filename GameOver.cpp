@@ -37,19 +37,6 @@ GameOver::GameOver() {
   registerInterest(df::STEP_EVENT);
 }
 
-// When done, game over.
-GameOver::~GameOver() {
-
-  // Remove Saucers.
-  df::ObjectList object_list = WM.getAllObjects(true);
-  df::ObjectListIterator i(&object_list);
-  for (i.first(); !i.isDone(); i.next()) {
-    df::Object *p_o = i.currentObject();
-    if (p_o -> getType() == "Saucer")
-      WM.markForDelete(p_o);
-  }
-}
-
 // Handle event.
 // Return 0 if ignored, else 1.
 int GameOver::eventHandler(const df::Event *p_e) {

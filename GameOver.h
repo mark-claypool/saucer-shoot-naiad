@@ -12,7 +12,6 @@ class GameOver : public df::Object {
 
  public:
   GameOver();
-  ~GameOver();
   int eventHandler(const df::Event *p_e);
   int draw();
 };
