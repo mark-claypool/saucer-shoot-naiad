@@ -22,9 +22,6 @@
 #include "Explosion.h"
 #include "Saucer.h"
 
-// Define registerInterest in case engine does not.
-static void registerInterest(std::string s) {};
-
 Saucer::Saucer() {
 
   // Set object type.
@@ -36,7 +33,9 @@ Saucer::Saucer() {
   moveToStart();
 
   // Register interest in "nuke" event.
+#ifdef DF_REGISTER_INTEREST
   registerInterest(NUKE_EVENT);
+#endif
 }
 
 // Handle event.
@@ -131,16 +130,16 @@ void Saucer::moveToStart() {
 
   // If collision, move right slightly until empty space.
 #ifdef USE_STL
-  std::vector<Object *> collision_list = WM.isCollision(this, temp_pos);
+  std::vector<Object *> collision_list = WM.getCollisions(this, temp_pos);
   while (!collision_list.empty()) {
     temp_pos.setX(temp_pos.getX()+1.0f);
-    collision_list = WM.isCollision(this, temp_pos);
+    collision_list = WM.getCollisions(this, temp_pos);
   }
 #else
-  df::ObjectList collision_list = WM.isCollision(this, temp_pos);
+  df::ObjectList collision_list = WM.getCollisions(this, temp_pos);
   while (!collision_list.isEmpty()) {
     temp_pos.setX(temp_pos.getX()+1.0f);
-    collision_list = WM.isCollision(this, temp_pos);
+    collision_list = WM.getCollisions(this, temp_pos);
   }
 #endif  
 
@@ -148,5 +147,6 @@ void Saucer::moveToStart() {
 }
 
 int Saucer::draw() {
-  DM.drawCh(getPosition(), SAUCER_CHAR, df::GREEN); 
+  DM.drawCh(getPosition(), SAUCER_CHAR, df::GREEN);
+  return 0;
 }

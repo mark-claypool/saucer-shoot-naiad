@@ -13,9 +13,6 @@
 #include "DisplayManager.h"
 #include "GameOver.h"
 
-// Define registerInterest in case engine does not.
-static void registerInterest(std::string s) {};
-
 GameOver::GameOver() {
 
   setType("GameOver");
@@ -34,7 +31,9 @@ GameOver::GameOver() {
   setAltitude(df::MAX_ALTITUDE);
 
   // Register for step event.
+#ifdef DF_REGISTER_INTEREST
   registerInterest(df::STEP_EVENT);
+#endif
 }
 
 // Handle event.
@@ -61,4 +60,5 @@ void GameOver::step() {
 
 int GameOver::draw() {
   DM.drawString(getPosition(), "Game Over!", df::CENTER_JUSTIFIED, df::WHITE);
+  return 0;
 }

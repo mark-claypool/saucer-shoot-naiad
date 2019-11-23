@@ -23,7 +23,8 @@ Star::Star() {
 }
 
 int Star::draw() {
-  DM.drawCh(getPosition(), STAR_CHAR, df::WHITE); 
+  DM.drawCh(getPosition(), STAR_CHAR, df::WHITE);
+  return 0;
 }
 
 // Handle event.

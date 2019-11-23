@@ -16,18 +16,17 @@
 #include "GameOver.h"
 #include "Hero.h"
 
-// Define registerInterest in case engine does not.
-static void registerInterest(std::string s) {};
-
 Hero::Hero() {
 
+#ifdef DF_REGISTER_INTEREST
   // Player controls hero, so register with keyboard and mouse.
   registerInterest(df::KEYBOARD_EVENT);
   registerInterest(df::MSE_EVENT);
 
   // Need to update fire rate control each step.
   registerInterest(df::STEP_EVENT);
-
+#endif
+  
   // Set object type.
   setType("Hero");
 
@@ -169,5 +168,6 @@ void Hero::nuke() {
 
 //  Custom draw.
 int Hero::draw() {
-  DM.drawCh(getPosition(), HERO_CHAR, df::BLUE); 
+  DM.drawCh(getPosition(), HERO_CHAR, df::BLUE);
+  return 0;
 }

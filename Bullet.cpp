@@ -54,5 +54,6 @@ void Bullet::hit(const df::EventCollision *p_c) {
 }
 
 int Bullet::draw() {
-  DM.drawCh(getPosition(), BULLET_CHAR, df::BLUE); 
+  DM.drawCh(getPosition(), BULLET_CHAR, df::BLUE);
+  return 0;
 }

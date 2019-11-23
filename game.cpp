@@ -2,7 +2,7 @@
 // game.cpp
 // 
 
-#define VERSION 1.3
+#define VERSION 1.4
 
 // Engine includes.
 #include "GameManager.h"
@@ -10,8 +10,8 @@
  
 // Game includes.
 #include "Hero.h"
-#include "Star.h"
 #include "Saucer.h"
+#include "Star.h"
 
 // Function prototypes.
 void populateWorld(void);
