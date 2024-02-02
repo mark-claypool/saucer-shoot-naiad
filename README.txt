@@ -1,5 +1,5 @@
 SAUCER SHOOT, Naiad Version
-v1.3
+v1.4
 
 This is a rendition of the Saucer Shoot tutorial for Dragonfly, but
 made to work with the Naiad version of Dragonfly.

@@ -3,7 +3,7 @@
 //
 
 // Uncomment if Dragonfly uses STL instead of ObjectList.
-#define USE_STL
+//#define USE_STL
 
 #include <stdlib.h>		// for rand()
 #ifdef USE_STL
